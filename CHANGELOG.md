@@ -1,3 +1,3 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+- Rfid C72 Sdk Plugin For Android 11
