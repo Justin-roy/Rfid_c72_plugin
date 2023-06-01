@@ -1,5 +1,7 @@
 # Rfid C72 SDK Plugin
 
+Note:- Android 11 Support.
+
 ## Steps to follow
 1. flutter pub add Rfid_c72_plugin
 2. create/add folder to android
