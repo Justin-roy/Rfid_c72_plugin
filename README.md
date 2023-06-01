@@ -1,6 +1,6 @@
 # Rfid C72 SDK Plugin
 
-Note:- Android 11 Support.
+Note:- This Plugin Have Android 11 Support.
 
 ## Steps to follow
 1. flutter pub add Rfid_c72_plugin
