@@ -54,6 +54,10 @@ class _MyAppState extends State<MyApp> {
 }
 ```
 
+## Tested on Rfid C72 Device
+
+<img width="300" src="https://firebasestorage.googleapis.com/v0/b/instagram-clone-cf306.appspot.com/o/github_ss%2Frfid_c72.jpg?alt=media&token=e1a8d8f0-a615-482f-805c-f474434a8792&_gl=1*8sr3gl*_ga*NTMyNDY1MDA5LjE2NTgyOTQxNDg.*_ga_CW55HF8NVT*MTY4NTYxNzk4My4yMS4xLjE2ODU2MTgwOTAuMC4wLjA."> 
+
 ## Authors
 
 - [@Justin Roy](https://www.linkedin.com/in/justin-roy-4817551ba/)
