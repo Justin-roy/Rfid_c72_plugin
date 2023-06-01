@@ -2,15 +2,16 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 
-class UhfC72Plugin {
-  static const MethodChannel _channel =  MethodChannel('uhf_plugin');
+class RfidC72Plugin {
+  static const MethodChannel _channel = MethodChannel('rfid_c72_plugin');
 
   static Future<String?> get platformVersion async {
     final String? version = await _channel.invokeMethod('getPlatformVersion');
     return version;
   }
 
-  static const EventChannel connectedStatusStream = EventChannel('ConnectedStatus');
+  static const EventChannel connectedStatusStream =
+      EventChannel('ConnectedStatus');
   static const EventChannel tagsStatusStream = EventChannel('TagsStatus');
 
   static Future<bool?> get isStarted async {
@@ -50,10 +51,12 @@ class UhfC72Plugin {
   }
 
   static Future<bool?> setPowerLevel(String value) async {
-    return _channel.invokeMethod('setPowerLevel', <String, String>{'value': value});
+    return _channel
+        .invokeMethod('setPowerLevel', <String, String>{'value': value});
   }
 
   static Future<bool?> setWorkArea(String value) async {
-    return _channel.invokeMethod('setWorkArea', <String, String>{'value': value});
+    return _channel
+        .invokeMethod('setWorkArea', <String, String>{'value': value});
   }
 }

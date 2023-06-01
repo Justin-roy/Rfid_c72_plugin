@@ -1,1 +1,2 @@
-rootProject.name = 'rfid_c72_plugin'
+include ':app',':libs'
+project(":libs").projectDir = file("./libs")

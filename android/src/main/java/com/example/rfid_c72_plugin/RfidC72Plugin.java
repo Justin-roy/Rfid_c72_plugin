@@ -5,9 +5,6 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
-import com.example.rfid_c72_plugin.UHFHelper;
-import com.example.rfid_c72_plugin.UHFListener;
-
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.common.EventChannel;
@@ -16,12 +13,6 @@ import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-import io.reactivex.subjects.PublishSubject;
 
 /** RfidC72Plugin */
 public class RfidC72Plugin implements FlutterPlugin, MethodCallHandler {
@@ -51,10 +42,10 @@ public class RfidC72Plugin implements FlutterPlugin, MethodCallHandler {
   // depending on the user's project. onAttachedToEngine or registerWith must both be defined
   // in the same class.
   public static void registerWith(Registrar registrar) {
-    final MethodChannel channel = new MethodChannel(registrar.messenger(), "uhf_plugin");
+    final MethodChannel channel = new MethodChannel(registrar.messenger(), "rfid_c72_plugin");
     initConnectedEvent(registrar.messenger());
     initReadEvent(registrar.messenger());
-    channel.setMethodCallHandler(new UHFPlugin());
+    channel.setMethodCallHandler(new RfidC72Plugin());
 
     UHFHelper.getInstance().init();
     UHFHelper.getInstance().setUhfListener(new UHFListener() {
@@ -73,11 +64,11 @@ public class RfidC72Plugin implements FlutterPlugin, MethodCallHandler {
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
-    final MethodChannel channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "uhf_plugin");
+    final MethodChannel channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "rfid_c72_plugin");
     initConnectedEvent(flutterPluginBinding.getBinaryMessenger());
     initReadEvent(flutterPluginBinding.getBinaryMessenger());
 
-    channel.setMethodCallHandler(new UHFPlugin());
+    channel.setMethodCallHandler(new RfidC72Plugin());
     UHFHelper.getInstance().init();
     UHFHelper.getInstance().setUhfListener(new UHFListener() {
       @Override

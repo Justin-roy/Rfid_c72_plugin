@@ -1,8 +1,9 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:rfid_c72_plugin/rfid_c72_plugin.dart';
+
 void main() {
-  const MethodChannel channel = MethodChannel('uhf_plugin');
+  const MethodChannel channel = MethodChannel('rfid_c72_plugin');
 
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -17,6 +18,6 @@ void main() {
   });
 
   test('getPlatformVersion', () async {
-    expect(await UhfC72Plugin.platformVersion, '42');
+    expect(await RfidC72Plugin.platformVersion, '42');
   });
 }
