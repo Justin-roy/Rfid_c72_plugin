@@ -1,6 +1,6 @@
 # Rfid C72 SDK Plugin
 
-Note:- This plugin supports Android 11.
+This plugin supports Android 11.
 
 ## Steps to follow
 1. Run command to add package:
