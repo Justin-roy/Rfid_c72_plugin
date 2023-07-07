@@ -8,12 +8,12 @@ This plugin supports Android 11.
    flutter pub add rfid_c72_plugin
    ```
 3. Create android/libs folder
- -  Download both [build.gradle](https://github.com/Justin-roy/Rfid_c72_plugin/blob/main/example/android/libs/build.gradle) and [DeviceAPI_ver20220518_release.aar](https://github.com/Justin-roy/Rfid_c72_plugin/blob/main/example/android/libs/DeviceAPI_ver20220518_release.aar) and copy to android/libs
-4. In android/setting.gradle add the following line to the top of the file:
+4. Download both [build.gradle](https://github.com/Justin-roy/Rfid_c72_plugin/blob/main/example/android/libs/build.gradle) and [DeviceAPI_ver20220518_release.aar](https://github.com/Justin-roy/Rfid_c72_plugin/blob/main/example/android/libs/DeviceAPI_ver20220518_release.aar) and copy to android/libs
+5. In android/setting.gradle add the following line to the top of the file:
    ```javascript
    include ':app',':libs' //libs is folder name
    ```
-5. In android/app/build.gradle add a reference to the libs folder in the dependencies section. [Example](https://github.com/Justin-roy/Rfid_c72_plugin/blob/main/example/android/app/build.gradle)
+6. In android/app/build.gradle add a reference to the libs folder in the dependencies section. [Example](https://github.com/Justin-roy/Rfid_c72_plugin/blob/main/example/android/app/build.gradle)
    ```javascript
    dependencies {
    implementation project(":libs",)
@@ -21,7 +21,7 @@ This plugin supports Android 11.
    //libs is folder name
    ```
    
-6. In android/app/build.gradle set minSdkVersion 19 or higher
+7. In android/app/build.gradle set minSdkVersion 19 or higher
  - Ready to use :D 
     
 - [Still confused? Refer to this example app link](https://github.com/Justin-roy/Rfid_c72_plugin/tree/main/example)
