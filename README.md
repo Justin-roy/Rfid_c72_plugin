@@ -24,7 +24,7 @@ This plugin supports Android 11.
 7. In android/app/build.gradle set minSdkVersion 19 or higher
  - Ready to use :D 
     
-- [Still confused? Refer to this example app link](https://github.com/Justin-roy/Rfid_c72_plugin/tree/main/example)
+- Still confused? Refer to [the example app](https://github.com/Justin-roy/Rfid_c72_plugin/tree/main/example)
     
 
 ## Examples
