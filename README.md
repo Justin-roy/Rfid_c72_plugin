@@ -3,28 +3,28 @@
 Note:- This Plugin Support Android 11.
 
 ## Steps to follow
-1. flutter pub add rfid_c72_plugin
-
-3. create/add folder to android
- -  create android/libs folder
- -  download content from below link and copy in android/libs
-    
-    Note:- (build.gradle and DeviceAPI_ver20220518_release.arr add this files to android/libs) [Link](https://github.com/Justin-roy/Rfid_c72_plugin/tree/main/android/libs)
-
-4. In setting.gradle add below lines.
- - include ':app',':libs' //libs is folder name
-5. In build.gradle add below lines. // app level (android/app/build.gradle)
- - dependencies {
+1. Run command to add package:
+   ```javascript
+   flutter pub add rfid_c72_plugin
+   ```
+3. Create android/libs folder
+ -  Download both [build.gradle](https://github.com/Justin-roy/Rfid_c72_plugin/blob/main/example/android/libs/build.gradle) and [DeviceAPI_ver20220518_release.aar](https://github.com/Justin-roy/Rfid_c72_plugin/blob/main/example/android/libs/DeviceAPI_ver20220518_release.aar) and copy to android/libs
+4. In android/setting.gradle add the following line to the top of the file:
+   ```javascript
+   include ':app',':libs' //libs is folder name
+   ```
+5. In android/app/build.gradle add a reference to the libs folder in the dependencies section. [Example](https://github.com/Justin-roy/Rfid_c72_plugin/blob/main/example/android/app/build.gradle)
+   ```javascript
+   dependencies {
    implementation project(":libs",)
    }
    //libs is folder name
+   ```
    
-   see here -> [link](https://github.com/Justin-roy/Rfid_c72_plugin/blob/main/example/android/app/build.gradle)
-   
-6. minSdkVersion 19 or higher
+6. In android/app/build.gradle set minSdkVersion 19 or higher
  - Ready to use :D 
     
-- [still confuse refer this link example app](https://github.com/Justin-roy/Rfid_c72_plugin/tree/main/example)
+- [Still confused? Refer to this example app link](https://github.com/Justin-roy/Rfid_c72_plugin/tree/main/example)
     
 
 ## Examples
