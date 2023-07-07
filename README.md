@@ -9,7 +9,7 @@ This plugin supports Android 11.
    ```
 3. Create android/libs folder
 4. Download both [build.gradle](https://github.com/Justin-roy/Rfid_c72_plugin/blob/main/example/android/libs/build.gradle) and [DeviceAPI_ver20220518_release.aar](https://github.com/Justin-roy/Rfid_c72_plugin/blob/main/example/android/libs/DeviceAPI_ver20220518_release.aar) and copy to android/libs
-5. In android/setting.gradle add the following line to the top of the file:
+5. In android/settings.gradle add the following line to the top of the file:
    ```javascript
    include ':app',':libs' //libs is folder name
    ```
