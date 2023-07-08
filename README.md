@@ -1,5 +1,10 @@
 # Rfid C72 SDK Plugin
 
+C72 deploys Chainway self-developed UHF RFID module CM2000-1, which provides perfect performance in UHF reading and writing
+Supporting protocals of EPC C1 GEN2 and ISO18000-6C and various frequency bands, C72 can read common RFID tags with high
+accuracy and speed in asset tracking, apparel inventory management, fleet management, toll road, warehousing, finance, etc.
+
+
 This plugin supports Android 11.
 
 ## Steps to follow
