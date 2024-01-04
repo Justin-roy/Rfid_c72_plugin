@@ -1,11 +1,16 @@
 package com.example.rfid_c72_plugin;
 
+import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.rscja.barcode.BarcodeDecoder;
+import com.rscja.barcode.BarcodeFactory;
+import com.rscja.barcode.BarcodeUtility;
 import com.rscja.deviceapi.RFIDWithUHFUART;
+import com.rscja.deviceapi.entity.BarcodeEntity;
 import com.rscja.deviceapi.entity.UHFTAGInfo;
 
 import org.json.JSONArray;
@@ -18,12 +23,20 @@ import java.util.Objects;
 public class UHFHelper {
     private static UHFHelper instance;
     public RFIDWithUHFUART mReader;
+
+    String TAG="MainActivity_2D";
+
+    public BarcodeDecoder barcodeDecoder;
     Handler handler;
     private UHFListener uhfListener;
     private boolean isStart = false;
     private boolean isConnect = false;
     //private boolean isSingleRead = false;
     private HashMap<String, EPC> tagList;
+
+    private String scannedBarcode;
+
+    private Context context;
 
     private UHFHelper() {
     }
@@ -46,8 +59,8 @@ public class UHFHelper {
         this.uhfListener = uhfListener;
     }
 
-    public void init() {
-        // this.context = context;
+    public void init(Context context) {
+        this.context = context;
         //this.uhfListener = uhfListener;
         tagList = new HashMap<String, EPC>();
         clearData();
@@ -62,6 +75,14 @@ public class UHFHelper {
 
     }
 
+    public String readBarcode(){
+        if(scannedBarcode != null) {
+            return scannedBarcode;
+        }else{
+            return "FAIL";
+        }
+    }
+
     public boolean connect() {
         try {
             mReader = RFIDWithUHFUART.getInstance();
@@ -69,16 +90,53 @@ public class UHFHelper {
             uhfListener.onConnect(false, 0);
             return false;
         }
-
         if (mReader != null) {
-            isConnect = mReader.init();
+            isConnect = mReader.init(context);
             //mReader.setFrequencyMode(2);
-//mReader.setPower(29);
+            //mReader.setPower(29);
             uhfListener.onConnect(isConnect, 0);
             return isConnect;
         }
         uhfListener.onConnect(false, 0);
         return false;
+    }
+
+
+
+    public boolean connectBarcode() {
+        if (barcodeDecoder == null) {
+            barcodeDecoder = BarcodeFactory.getInstance().getBarcodeDecoder();
+        }
+        barcodeDecoder.open(context);
+
+        //BarcodeUtility.getInstance().enablePlaySuccessSound(context, true);
+
+        barcodeDecoder.setDecodeCallback(new BarcodeDecoder.DecodeCallback() {
+            @Override
+            public void onDecodeComplete(BarcodeEntity barcodeEntity) {
+                Log.e(TAG,"BarcodeDecoder==========================:"+barcodeEntity.getResultCode());
+                if(barcodeEntity.getResultCode() == BarcodeDecoder.DECODE_SUCCESS){
+                    scannedBarcode = barcodeEntity.getBarcodeData();
+                    Log.e(TAG,"Data==========================:"+barcodeEntity.getBarcodeData());
+                }else{
+                    scannedBarcode = "FAIL";
+                }
+            }
+        });
+        return true;
+    }
+
+
+    public boolean scanBarcode() {
+        barcodeDecoder.startScan();
+        Log.i(TAG, "Calling scan code");
+        return true;
+    }
+
+    public boolean stopScan() {
+        barcodeDecoder.stopScan();
+        Log.i(TAG, "Calling stop scan");
+        return true;
     }
 
     public boolean start(boolean isSingleRead) {
@@ -194,6 +252,11 @@ public class UHFHelper {
 
     public boolean isConnected() {
         return isConnect;
+    }
+
+    public boolean closeScan() {
+        barcodeDecoder.close();
+        return true;
     }
 
     class TagThread extends Thread {

@@ -1,4 +1,7 @@
 package com.example.rfid_c72_plugin;
+
+import android.content.Context;
+
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -14,7 +17,9 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 
-/** RfidC72Plugin */
+/**
+ * RfidC72Plugin
+ */
 public class RfidC72Plugin implements FlutterPlugin, MethodCallHandler {
   private static final String CHANNEL_IsStarted = "isStarted";
   private static final String CHANNEL_StartSingle = "startSingle";
@@ -29,6 +34,11 @@ public class RfidC72Plugin implements FlutterPlugin, MethodCallHandler {
   private static final String CHANNEL_SETWORKAREA = "setWorkArea";
   private static final String CHANNEL_ConnectedStatus = "ConnectedStatus";
   private static final String CHANNEL_TagsStatus = "TagsStatus";
+  private static final String CHANNEL_CONNECT_BARCODE = "connectBarcode";
+  private static final String CHANNEL_SCAN_BARCODE = "scanBarcode";
+  private static final String CHANNEL_STOP_SCAN_BARCODE = "stopScan";
+  private static final String CHANNEL_READ_BARCODE = "readBarcode";
+  private static final String CHANNEL_CLOSE_SCAN_BARCODE="closeScan";
   private static PublishSubject<Boolean> connectedStatus = PublishSubject.create();
   private static PublishSubject<String> tagsStatus = PublishSubject.create();
 
@@ -47,7 +57,7 @@ public class RfidC72Plugin implements FlutterPlugin, MethodCallHandler {
     initReadEvent(registrar.messenger());
     channel.setMethodCallHandler(new RfidC72Plugin());
 
-    UHFHelper.getInstance().init();
+    UHFHelper.getInstance().init(registrar.context());
     UHFHelper.getInstance().setUhfListener(new UHFListener() {
       @Override
       public void onRead(String tagsJson) {
@@ -67,9 +77,9 @@ public class RfidC72Plugin implements FlutterPlugin, MethodCallHandler {
     final MethodChannel channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "rfid_c72_plugin");
     initConnectedEvent(flutterPluginBinding.getBinaryMessenger());
     initReadEvent(flutterPluginBinding.getBinaryMessenger());
-
+    Context applicationContext = flutterPluginBinding.getApplicationContext();
     channel.setMethodCallHandler(new RfidC72Plugin());
-    UHFHelper.getInstance().init();
+    UHFHelper.getInstance().init(applicationContext);
     UHFHelper.getInstance().setUhfListener(new UHFListener() {
       @Override
       public void onRead(String tagsJson) {
@@ -206,6 +216,21 @@ public class RfidC72Plugin implements FlutterPlugin, MethodCallHandler {
       case CHANNEL_SETWORKAREA:
         String workArea = call.argument("value");
         result.success(UHFHelper.getInstance().setWorkArea(workArea));
+        break;
+      case CHANNEL_CONNECT_BARCODE:
+        result.success(UHFHelper.getInstance().connectBarcode());
+        break;
+      case CHANNEL_SCAN_BARCODE:
+        result.success(UHFHelper.getInstance().scanBarcode());
+        break;
+      case CHANNEL_STOP_SCAN_BARCODE:
+        result.success(UHFHelper.getInstance().stopScan());
+        break;
+      case CHANNEL_CLOSE_SCAN_BARCODE:
+        result.success(UHFHelper.getInstance().closeScan());
+        break;
+      case CHANNEL_READ_BARCODE:
+        result.success(UHFHelper.getInstance().readBarcode());
         break;
       default:
         result.notImplemented();
