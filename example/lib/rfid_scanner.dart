@@ -19,10 +19,23 @@ class _RfidScannerState extends State<RfidScanner> {
   bool _isConnected = false;
   bool _isLoading = true;
   int _totalEPC = 0, _invalidEPC = 0, _scannedEPC = 0;
+
   @override
   void initState() {
     super.initState();
     initPlatformState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    closeAll();
+  }
+
+  //Hopefully we free memory in the device.
+  closeAll() {
+    RfidC72Plugin.stopScan;
+    RfidC72Plugin.close;
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -44,6 +57,8 @@ class _RfidScannerState extends State<RfidScanner> {
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
     // setState to update our non-existent appearance.
+
+    await RfidC72Plugin.connectBarcode; //connect barcode
     if (!mounted) return;
 
     setState(() {
@@ -54,12 +69,15 @@ class _RfidScannerState extends State<RfidScanner> {
 
   List<TagEpc> _data = [];
   final List<String> _EPC = [];
+
   void updateTags(dynamic result) async {
     setState(() {
       _data = TagEpc.parseTags(result);
       _totalEPC = _data.toSet().toList().length;
     });
   }
+
+  List<String?> _barcodes = [];
 
   void updateIsConnected(dynamic isConnected) {
     //setState(() {
@@ -73,7 +91,7 @@ class _RfidScannerState extends State<RfidScanner> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Rfid Reader C72'),
+        title: const Text('Rfid and 2D Barcode Reader C72'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -108,20 +126,20 @@ class _RfidScannerState extends State<RfidScanner> {
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
-                          _isContinuousCall ? Colors.red : Colors.green,
+                      _isContinuousCall ? Colors.red : Colors.green,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(29.0),
                       ),
                     ),
                     child: _isContinuousCall
                         ? const Text(
-                            'Stop Continuous Reading',
-                            style: TextStyle(color: Colors.white),
-                          )
+                      'Stop Continuous Reading',
+                      style: TextStyle(color: Colors.white),
+                    )
                         : const Text(
-                            'Start Continuous Reading',
-                            style: TextStyle(color: Colors.white),
-                          ),
+                      'Start Continuous Reading',
+                      style: TextStyle(color: Colors.white),
+                    ),
                     onPressed: () async {
                       bool? isStarted = _isContinuousCall == true
                           ? await RfidC72Plugin.stop
@@ -150,6 +168,62 @@ class _RfidScannerState extends State<RfidScanner> {
                     //     _logs.clear();
                   });
                 }),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.redAccent,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(29.0),
+                      ),
+                    ),
+                    child: const Text(
+                      'Start 2D Barcode scan',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () async {
+                      await RfidC72Plugin.scanBarcode;
+                      await Future.delayed(const Duration(seconds: 1));
+                      String? scannedCode = await RfidC72Plugin.readBarcode;
+                      setState(() {
+                        _barcodes.add(scannedCode);
+                      });
+                    }),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.redAccent,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(29.0),
+                      ),
+                    ),
+                    child: const Text(
+                      'Stop 2D Barcode scan',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () async {
+                      await RfidC72Plugin.stopScan;
+                      await Future.delayed(const Duration(seconds: 1));
+                      setState(() {
+                        _barcodes = [];
+                      });
+                    }),
+              ],
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 50,
+              color: Colors.blue[400],
+              child: Center(
+                child: Text(
+                  'Barcodes: $_barcodes',
+                  style: GoogleFonts.lato(
+                    color: Colors.black,
+                    fontSize: 22,
+                  ),
+                ),
+              ),
+            ),
             Container(
               width: MediaQuery.of(context).size.width,
               height: 50,
@@ -165,7 +239,7 @@ class _RfidScannerState extends State<RfidScanner> {
               ),
             ),
             ..._data.map(
-              (TagEpc tag) {
+                  (TagEpc tag) {
                 _EPC.add(tag.epc.replaceAll(RegExp('EPC:'), ''));
                 return Card(
                   color: Colors.blue.shade50,
