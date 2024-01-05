@@ -1,6 +1,6 @@
 name: rfid_c72_plugin
 description: Rfid C72 Sdk Plugin.
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/Justin-roy/Rfid_c72_plugin.git
 
 environment:

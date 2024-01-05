@@ -64,7 +64,7 @@ class _MyAppState extends State<MyApp> {
 # Older version (0.0.1)
 <img width="300" src="https://firebasestorage.googleapis.com/v0/b/instagram-clone-cf306.appspot.com/o/github_ss%2Frfid_c72.jpg?alt=media&token=e1a8d8f0-a615-482f-805c-f474434a8792&_gl=1*8sr3gl*_ga*NTMyNDY1MDA5LjE2NTgyOTQxNDg.*_ga_CW55HF8NVT*MTY4NTYxNzk4My4yMS4xLjE2ODU2MTgwOTAuMC4wLjA."> 
 
-## 2d Barcode Scan (Laser Scan)
+## Added 2d Barcode Scan (Laser Scan)
 # New version (0.0.2)
 <img width="300" src="https://firebasestorage.googleapis.com/v0/b/instagram-clone-cf306.appspot.com/o/github_ss%2F2d_barcode.JPG?alt=media&token=5b717973-c429-4c7c-8669-22fe87d8d8d7"> 
 
