@@ -11,7 +11,7 @@ class RfidC72Plugin {
   }
 
   static const EventChannel connectedStatusStream =
-      EventChannel('ConnectedStatus');
+  EventChannel('ConnectedStatus');
   static const EventChannel tagsStatusStream = EventChannel('TagsStatus');
 
   static Future<bool?> get isStarted async {
@@ -50,6 +50,23 @@ class RfidC72Plugin {
     return _channel.invokeMethod('isConnected');
   }
 
+  static Future<bool?> get connectBarcode async {
+    return _channel.invokeMethod('connectBarcode');
+  }
+
+  static Future<bool?> get scanBarcode async {
+    return _channel.invokeMethod('scanBarcode');
+  }
+
+  static Future<bool?> get stopScan async {
+    return _channel.invokeMethod('stopScan');
+  }
+
+
+  static Future<bool?> get closeScan async {
+    return _channel.invokeMethod('closeScan');
+  }
+
   static Future<bool?> setPowerLevel(String value) async {
     return _channel
         .invokeMethod('setPowerLevel', <String, String>{'value': value});
@@ -58,5 +75,10 @@ class RfidC72Plugin {
   static Future<bool?> setWorkArea(String value) async {
     return _channel
         .invokeMethod('setWorkArea', <String, String>{'value': value});
+  }
+
+  static Future<String?> get readBarcode async {
+    final String? barcode = await _channel.invokeMethod('readBarcode');
+    return barcode;
   }
 }
