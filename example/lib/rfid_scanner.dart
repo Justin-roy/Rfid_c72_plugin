@@ -39,8 +39,8 @@ class _RfidScannerState extends State<RfidScanner> {
         .listen(updateIsConnected);
     RfidC72Plugin.tagsStatusStream.receiveBroadcastStream().listen(updateTags);
     await RfidC72Plugin.connect;
-    // await UhfC72Plugin.setWorkArea('2');
-    // await UhfC72Plugin.setPowerLevel('30');
+    // await RfidC72Plugin.setWorkArea('2');
+    // await RfidC72Plugin.setPowerLevel('30');
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
     // setState to update our non-existent appearance.
