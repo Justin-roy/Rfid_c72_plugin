@@ -202,6 +202,7 @@ class _RfidScannerState extends State<RfidScanner> {
                             count: '',
                             rssi: '',
                           ));
+                          _totalEPC = _data.toSet().toList().length;
                         });
                       } else {
                         await RfidC72Plugin.stopScan;
