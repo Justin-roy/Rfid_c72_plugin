@@ -4,7 +4,6 @@ C72 deploys Chainway self-developed UHF RFID module CM2000-1, which provides per
 Supporting protocals of EPC C1 GEN2 and ISO18000-6C and various frequency bands, C72 can read common RFID tags with high
 accuracy and speed in asset tracking, apparel inventory management, fleet management, toll road, warehousing, finance, etc.
 
-
 This plugin supports Android 11.
 
 ## Steps to follow
@@ -68,6 +67,9 @@ class _MyAppState extends State<MyApp> {
 # New version (0.0.2)
 <img width="300" src="https://firebasestorage.googleapis.com/v0/b/instagram-clone-cf306.appspot.com/o/github_ss%2F2d_barcode.JPG?alt=media&token=5b717973-c429-4c7c-8669-22fe87d8d8d7"> 
 
+## Add 2d Barcode Scan to Tag List (Laser Scan)
+# New version (0.0.3)
+## Fixed Tag List for 2d Barcode Scan
 
 ### 2d Barcode Contributors By
 
