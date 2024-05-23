@@ -69,7 +69,7 @@ class _MyAppState extends State<MyApp> {
 <img width="300" src="https://firebasestorage.googleapis.com/v0/b/instagram-clone-cf306.appspot.com/o/github_ss%2F2d_barcode.JPG?alt=media&token=5b717973-c429-4c7c-8669-22fe87d8d8d7"> 
 
 
-### 2d Barcode Contributors By
+### 2d Barcode Contributed By
 
 - [David Vamvakas](https://github.com/dvamvakas-cyberheroes)
 
