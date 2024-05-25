@@ -1,10 +1,10 @@
 name: rfid_c72_plugin
 description: Rfid C72 Sdk Plugin.
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/Justin-roy/Rfid_c72_plugin.git
 
 environment:
-  sdk: '>=2.18.4 <3.0.0'
+  sdk: ">=2.18.4 <3.0.0"
   flutter: ">=2.5.0"
 
 dependencies:

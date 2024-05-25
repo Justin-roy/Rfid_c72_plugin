@@ -117,6 +117,7 @@ public class UHFHelper {
                 Log.e(TAG,"BarcodeDecoder==========================:"+barcodeEntity.getResultCode());
                 if(barcodeEntity.getResultCode() == BarcodeDecoder.DECODE_SUCCESS){
                     scannedBarcode = barcodeEntity.getBarcodeData();
+                    addEPCToList(scannedBarcode, "");
                     Log.e(TAG,"Data==========================:"+barcodeEntity.getBarcodeData());
                 }else{
                     scannedBarcode = "FAIL";
