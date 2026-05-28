@@ -1,21 +1,21 @@
 name: rfid_c72_plugin
 description: Rfid C72 Sdk Plugin.
-version: 0.0.3
+version: 0.0.4
 homepage: https://github.com/Justin-roy/Rfid_c72_plugin.git
 
 environment:
-  sdk: ">=2.18.4 <3.0.0"
+  sdk: '>=3.10.1 <4.0.0'
   flutter: ">=2.5.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  plugin_platform_interface: ^2.0.2
+  plugin_platform_interface: ^2.1.8
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^6.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -36,8 +36,6 @@ flutter:
     platforms:
       android:
         package: com.example.rfid_c72_plugin
-        pluginClass: RfidC72Plugin
-      ios:
         pluginClass: RfidC72Plugin
 
   # To add assets to your plugin package, add an assets section, like this:
